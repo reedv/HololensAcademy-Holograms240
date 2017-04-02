@@ -193,6 +193,9 @@ public class CustomMessages : Singleton<CustomMessages>
         }
     }
 
+    /// <summary>
+    /// Broadcast a ResetStage message to all connected users
+    /// </summary>
     public void SendResetStage()
     {
         // If we are connected to a session, broadcast our head info

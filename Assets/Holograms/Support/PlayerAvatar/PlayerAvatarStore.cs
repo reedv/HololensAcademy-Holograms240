@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Academy.HoloToolkit.Unity;
 
 /// <summary>
-/// Keeps a list of possible avatars that the user can pick from.
+/// Maintains a list of possible avatars that the user can pick from.
 /// </summary>
 public class PlayerAvatarStore : Singleton<PlayerAvatarStore>
 {
@@ -98,7 +98,9 @@ public class PlayerAvatarStore : Singleton<PlayerAvatarStore>
         audioStartTime = Time.time;
     }
 
-    // Called every frame.
+    /// <summary>
+    /// Avator selection menu continuously pings while active so users can find it 
+    /// </summary>
     void Update()
     {
         if (PickerActive)

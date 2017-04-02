@@ -2,7 +2,7 @@
 using Academy.HoloToolkit.Unity;
 
 /// <summary>
-/// Script to handle the user selecting the avatar.
+/// Script to handle the user selecting an avatar.
 /// </summary>
 public class AvatarSelector : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class AvatarSelector : MonoBehaviour
 
     void Start()
     {
-        // Add Billboard component so the avatar always faces the user.
+        // Add Billboard component so the avatars always faces the user.
         Billboard billboard = gameObject.GetComponent<Billboard>();
         if (billboard == null)
         {

@@ -46,6 +46,9 @@ public class AppStateManager : Singleton<AppStateManager>
         PlayerAvatarStore.Instance.SpawnAvatarPicker();
     }
 
+    /// <summary>
+    /// Sets app state back to the WaitingForAnchor state
+    /// </summary>
     public void ResetStage()
     {
         // If we fall back to waiting for anchor, everything needed to 
@@ -62,6 +65,9 @@ public class AppStateManager : Singleton<AppStateManager>
         }
     }
 
+    /// <summary>
+    /// Sets up different states of the experience when app is in that state
+    /// </summary>
     void Update()
     {
         switch (CurrentAppState)

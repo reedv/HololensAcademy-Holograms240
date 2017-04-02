@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Adds and updates the head transforms of remote (other) users.  
+/// Adds and updates the head transforms of remote/other users.  
 /// Head transforms are sent and received in the local coordinate space of the GameObject
 /// this component is on.  
 /// </summary>
@@ -36,6 +36,9 @@ public class RemotePlayerManager : Singleton<RemotePlayerManager>
 
     CustomMessages customMessages;
 
+    /// <summary>
+    /// Assigns custommessage and session joining/leaving hooks
+    /// </summary>
     void Start()
     {
         customMessages = CustomMessages.Instance;
@@ -107,7 +110,7 @@ public class RemotePlayerManager : Singleton<RemotePlayerManager>
     }
 
     /// <summary>
-    /// Called when a user's avatar has changed.
+    /// Called when a user's avatar has changed. Updates user's avatar.
     /// </summary>
     /// <param name="msg"></param>
     void UpdateUserAvatar(NetworkInMessage msg)
@@ -160,6 +163,7 @@ public class RemotePlayerManager : Singleton<RemotePlayerManager>
 
     /// <summary>
     /// Called when a remote user sends a head transform.
+    /// Updates transforms of remote/other-players' heads
     /// </summary>
     /// <param name="msg"></param>
     void UpdateHeadTransform(NetworkInMessage msg)

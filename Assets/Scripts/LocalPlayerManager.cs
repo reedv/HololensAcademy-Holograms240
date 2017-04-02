@@ -7,7 +7,7 @@ using Academy.HoloToolkit.Unity;
 public class LocalPlayerManager : Singleton<LocalPlayerManager>
 {
     /// <summary>
-    /// The selected avatar index for the player.
+    /// The selected avatar index for this/local player.
     /// </summary>
     public int AvatarIndex { get; private set; }
 
@@ -31,7 +31,7 @@ public class LocalPlayerManager : Singleton<LocalPlayerManager>
         CustomMessages.Instance.SendUserAvatar(AvatarIndex);
     }
 
-    // Send the user's position each frame.
+    // Broadcast the user's position each frame.
     void Update()
     {
         if (ImportExportAnchorManager.Instance.AnchorEstablished)

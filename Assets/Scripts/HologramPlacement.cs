@@ -26,6 +26,10 @@ public class HologramPlacement : Singleton<HologramPlacement>
     /// </summary>
     KeywordRecognizer keywordRecognizer;
 
+    /// <summary>
+    /// Hooks messages that this component handles as well as initializing 
+    /// kword recognizer for this component.
+    /// </summary>
     void Start()
     {
         // When we first start, we need to disable the model to avoid it obstructing the user picking a hat.
@@ -49,9 +53,9 @@ public class HologramPlacement : Singleton<HologramPlacement>
     }
 
     /// <summary>
-    /// When the keyword recognizer hears a command this will be called.  
+    /// When the keyword recognizer hears/recognizes a command this will be called.  
     /// In this case we only have one keyword, which will re-enable moving the 
-    /// target.
+    /// target when gazed.
     /// </summary>
     /// <param name="args">information to help route the voice command.</param>
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
@@ -78,7 +82,8 @@ public class HologramPlacement : Singleton<HologramPlacement>
     }
 
     /// <summary>
-    /// When a new user joins we want to send them the relative transform for the model if we have it.
+    /// When a new user joins we want to send them the relative transform 
+    /// for the attached-to model if we have it.
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -128,7 +133,10 @@ public class HologramPlacement : Singleton<HologramPlacement>
         disabledRenderers.Clear();
     }
 
-
+    /// <summary>
+    /// If the model has been established and avatar picked, activate EngeryHub component.
+    /// Else, propose a location for the model to be placed.
+    /// </summary>
     void Update()
     {
         // Wait till users pick an avatar to enable renderers.
@@ -155,6 +163,10 @@ public class HologramPlacement : Singleton<HologramPlacement>
         }
     }
 
+    /// <summary>
+    /// Propose a transform position based on the gaze direction of the placing user
+    /// </summary>
+    /// <returns></returns>
     Vector3 ProposeTransformPosition()
     {
         // Put the model 2m in front of the user.
@@ -164,7 +176,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
     }
 
     /// <summary>
-    /// propagate transform location to all players
+    /// Propagate transform location of model to all players
     /// </summary>
     public void OnSelect()
     {
@@ -177,6 +189,7 @@ public class HologramPlacement : Singleton<HologramPlacement>
 
     /// <summary>
     /// When a remote system has a transform for us, we'll get it here.
+    /// Handles StangeTransform custommessages.
     /// </summary>
     /// <param name="msg"></param>
     void OnStageTransfrom(NetworkInMessage msg)
@@ -199,12 +212,14 @@ public class HologramPlacement : Singleton<HologramPlacement>
 
     /// <summary>
     /// When a remote system has a transform for us, we'll get it here.
+    /// Handles ResetStage custommessages.
     /// </summary>
     void OnResetStage(NetworkInMessage msg)
     {
         GotTransform = false;
 
         GetComponent<EnergyHubBase>().ResetAnimation();
+
         AppStateManager.Instance.ResetStage();
     }
 }
